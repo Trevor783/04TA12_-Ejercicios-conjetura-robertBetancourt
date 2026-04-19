@@ -1,0 +1,36 @@
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function collatz(n) {
+  const secuencia = [n];
+
+  while (n !== 1) {
+    if (n % 2 === 0) {
+      n = n / 2;
+    } else {
+      n = 3 * n + 1;
+    }
+    secuencia.push(n);
+  }
+
+  return secuencia;
+}
+
+
+function generarSerie(cantidad, min = 1, max = 100) {
+  const resultados = [];
+
+  for (let i = 0; i < cantidad; i++) {
+    const num = randomInt(min, max);
+    resultados.push({
+      numero: num,
+      secuencia: collatz(num),
+      pasos: collatz(num).length - 1
+    });
+  }
+
+  return resultados;
+}
+
+console.log(generarSerie(5, 1, 50));
